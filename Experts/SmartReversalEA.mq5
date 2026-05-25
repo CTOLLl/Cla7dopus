@@ -174,7 +174,8 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
                         const MqlTradeResult &result)
   {
    if(trans.type != TRADE_TRANSACTION_DEAL_ADD) return;
-   if(!deal.Ticket(trans.deal)) return;
+   if(!HistoryDealSelect(trans.deal)) return;
+   deal.Ticket(trans.deal);
    if(deal.Magic() != InpMagic) return;
    if(deal.Symbol() != _Symbol) return;
    if(deal.Entry() != DEAL_ENTRY_OUT && deal.Entry() != DEAL_ENTRY_INOUT) return;
